@@ -110,10 +110,10 @@ export default {
   color: orange;
 }
 .coffescript {
-  color: red;
+  color: cyan;
 }
 .ruby {
-  color: purple;
+  color: red;
 }
 .shell {
   color: grey;
@@ -126,5 +126,8 @@ export default {
 }
 .rust {
   color: brown;
+}
+.css {
+  color: purple;
 }
 </style>
