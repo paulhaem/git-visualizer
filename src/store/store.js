@@ -12,6 +12,8 @@ export const store = new Vuex.Store({
   state: {
     results: [],
     toprepos: [],
+    repository: '',
+    readme: '',
   },
   getters,
   mutations,
