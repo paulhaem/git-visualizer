@@ -1,6 +1,11 @@
 <template>
   <div class="card">
-    <p class="name">{{ data.full_name }}</p>
+    <router-link :to="{ name: 'Information', params: { username: data.owner.login, reponame: data.name }}">
+      <div class="title" >
+        <p class="name">{{ data.full_name }}</p>
+        <font-awesome-icon class="arrow" size="2x" :icon="['far', 'angle-right']"  />
+      </div>
+    </router-link>
     <p v-if="data.description" class="description" >{{ data.description }}</p>
     <p v-else>No Description.</p>
     <div class="footer">
@@ -9,9 +14,13 @@
       </p>
       <p v-else></p>
       <p class="stars" v-if="data.stargazers_count > 999" >
-        <font-awesome-icon :icon="['far', 'star']" /> {{ Math.round(data.stargazers_count/100)/10 }}k
+        <font-awesome-icon :icon="['far', 'star']" />
+        {{ Math.round(data.stargazers_count/100)/10 }}k
       </p>
-      <p class="stars" v-else><font-awesome-icon :icon="['far', 'star']" /> {{ data.stargazers_count }}</p>
+      <p class="stars" v-else>
+        <font-awesome-icon :icon="['far', 'star']" />
+        {{ data.stargazers_count }}
+      </p>
     </div>
   </div>
 </template>
@@ -61,7 +70,21 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   flex-shrink: 0;
+  text-decoration: none;
 }
+.title {
+  position: relative;
+}
+.card a {
+  text-decoration: none;
+}
+.arrow {
+  position: absolute;
+  top: .25em;
+  right: .4em;
+  color: white;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;
