@@ -9,9 +9,9 @@
       </p>
       <p v-else></p>
       <p class="stars" v-if="data.stargazers_count > 999" >
-        &#9734; {{ Math.round(data.stargazers_count/100)/10 }}k
+        <font-awesome-icon :icon="['far', 'star']" /> {{ Math.round(data.stargazers_count/100)/10 }}k
       </p>
-      <p class="stars" v-else>&#9734; {{ data.stargazers_count }}</p>
+      <p class="stars" v-else><font-awesome-icon :icon="['far', 'star']" /> {{ data.stargazers_count }}</p>
     </div>
   </div>
 </template>
