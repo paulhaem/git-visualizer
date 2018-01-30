@@ -1,8 +1,10 @@
 <template>
   <div class="header">
-    <div class="logo">
-      <h1>GitVisualizer</h1>
-    </div>
+    <router-link :to="{ name: 'Home'}">
+      <div class="logo">
+        <h1>GitVisualizer</h1>
+      </div>
+    </router-link>
     <Navigation/>
     <Search/>
   </div>
@@ -39,5 +41,8 @@ export default {
 h1 {
   margin: 0;
   line-height: 2em;
+}
+.header a {
+  text-decoration: none;
 }
 </style>
