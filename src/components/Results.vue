@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Card from './Card';
 
 export default {
@@ -13,21 +12,18 @@ export default {
   components: {
     Card,
   },
-  data() {
-    return {
-      results: '',
-    };
+  computed: {
+    results() {
+      return this.$store.getters.results;
+    },
   },
   mounted() {
+    // save search results to store
     this.getResults(this.$route.params.data);
   },
   methods: {
-    getResults(data) {
-      // eslint-disable-next-line
-      const url = 'https://api.github.com/search/repositories?q=' + data;
-      axios.get(url).then((response) => {
-        this.results = response.data.items;
-      });
+    getResults(query) {
+      this.$store.dispatch('getResults', query);
     },
   },
   watch: {

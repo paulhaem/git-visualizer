@@ -19,8 +19,6 @@ export default {
   methods: {
     getResult(query) {
       if (router.name === 'Results') {
-        // eslint-disable-next-line
-        console.log('replacing');
         router.replace({ name: 'user-view', params: { data: query } });
       } else {
         router.push({ name: 'Results', params: { data: query } });
