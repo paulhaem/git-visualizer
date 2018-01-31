@@ -9,11 +9,11 @@
         <h3>Description</h3>
         <p>{{ repository.description }}</p>
         <ul>
-          <li><font-awesome-icon class="arrow" size="2x" :icon="['far', 'users']"/> {{ statistics.contributors }}</li>
-          <li><font-awesome-icon class="arrow" size="2x" :icon="['far', 'plus-circle']"/> {{ statistics.additions }}</li>
-          <li><font-awesome-icon class="arrow" size="2x" :icon="['far', 'minus-circle']"/> {{ statistics.deletions }}</li>
-          <li><font-awesome-icon class="arrow" size="2x" :icon="['far', 'code']"/> {{ statistics.commits }}</li>
-          <li><font-awesome-icon class="arrow" size="2x" :icon="['far', 'align-left']"/> {{ statistics.loc }}</li>
+          <li><font-awesome-icon class="arrow" size="2x" :icon="['far', 'users']"/><span> {{ statistics.contributors }}</span></li>
+          <li><font-awesome-icon class="arrow plus" size="2x" :icon="['far', 'plus-circle']"/><span> {{ statistics.additions }}</span></li>
+          <li><font-awesome-icon class="arrow minus" size="2x" :icon="['far', 'minus-circle']"/><span> {{ statistics.deletions }}</span></li>
+          <li><font-awesome-icon class="arrow" size="2x" :icon="['far', 'code']"/><span> {{ statistics.commits }}</span></li>
+          <li><font-awesome-icon class="arrow" size="2x" :icon="['far', 'align-left']"/><span> {{ statistics.loc }}</span></li>
         </ul>
       </div>
     </div>
@@ -64,6 +64,9 @@ export default {
       this.getStatistics(repodata);
       this.getCommits(repodata);
     };
+  },
+  beforeDestroy() {
+    this.$store.commit('delRepository');
   },
   methods: {
     getRepository(repodata) {
@@ -125,12 +128,24 @@ export default {
   font-size: .75em;
 }
 .content ul {
+  padding-top: 1em;
   display: flex;
   justify-content: space-around;
   list-style-type: none;
+  color: #888888;
 }
 .content ul li {
   font-weight: bold;
+}
+.content span {
+  padding-left: .2em;
+  font-size: 1.5em;
+}
+.plus {
+  color: #87AA66;
+}
+.minus {
+  color: #E16989;
 }
 
 .description h3 {

@@ -52,4 +52,8 @@ export default {
     }
     state.statistics.loc = loc;
   },
+  delRepository(state) {
+    console.log('deleting..');
+    state.readme = '';
+  },
 };
