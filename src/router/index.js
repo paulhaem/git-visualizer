@@ -5,6 +5,7 @@ import Results from '@/components/Results';
 import Information from '@/components/Information';
 import Commits from '@/components/Commits';
 import Contributors from '@/components/Contributors';
+import Dashboard from '@/components/Dashboard';
 
 Vue.use(Router);
 
@@ -15,6 +16,11 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home,
+    },
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: Dashboard,
     },
     {
       path: '/repo/:username/:reponame/information',
