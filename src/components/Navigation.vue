@@ -21,7 +21,6 @@
       ">
         Contributors
       </router-link>
-    </li>
   </div>
 </template>
 
