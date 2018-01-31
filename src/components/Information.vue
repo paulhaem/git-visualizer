@@ -65,6 +65,9 @@ export default {
       this.getCommits(repodata);
     };
   },
+  beforeDestroy() {
+    this.$store.commit('delRepository');
+  },
   methods: {
     getRepository(repodata) {
       this.$store.dispatch('getRepository', repodata);
