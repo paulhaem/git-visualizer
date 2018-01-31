@@ -4,7 +4,7 @@ import Home from '@/components/Home';
 import Results from '@/components/Results';
 import Information from '@/components/Information';
 import Commits from '@/components/Commits';
-import Contributers from '@/components/Contributers';
+import Contributors from '@/components/Contributors';
 
 Vue.use(Router);
 
@@ -27,9 +27,9 @@ export default new Router({
       component: Commits,
     },
     {
-      path: '/repo/:username/:reponame/contributers',
-      name: 'Contributers',
-      component: Contributers,
+      path: '/repo/:username/:reponame/contributors',
+      name: 'Contributors',
+      component: Contributors,
     },
     {
       path: '/results/:data',
