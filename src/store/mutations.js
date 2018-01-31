@@ -12,6 +12,7 @@ export default {
   },
   setAuthentication(state, flag) {
     state.isAuthenticated = flag;
+  },
   addTopRepo(state, repo) {
     state.toprepos.push(repo);
   },

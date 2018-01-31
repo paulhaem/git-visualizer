@@ -17,6 +17,8 @@ export default {
       },
     }).then((response) => {
       context.commit('getUser', response);
+    });
+  },
   getTopRepos(context) {
     // get vue
     let url = `https://api.github.com/repos/vuejs/vue?client_id=${clientinfo.client_id}&client_secret=${clientinfo.client_secret}`;
