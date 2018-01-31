@@ -11,4 +11,7 @@ export default {
   readme(state) {
     return state.readme;
   },
+  statistics(state) {
+    return state.statistics;
+  },
 };

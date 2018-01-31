@@ -37,4 +37,14 @@ export default {
       context.commit('getReadMe', response.data);
     });
   },
+  getStatistics(context, repodata) {
+    let url = `https://api.github.com/repos/${repodata.owner}/${repodata.repo}/stats/contributors?client_id=${clientinfo.client_id}&client_secret=${clientinfo.client_secret}`;
+    axios.get(url).then((response) => {
+      context.commit('getStatistics', response.data);
+    });
+    url = `https://api.github.com/repos/${repodata.owner}/${repodata.repo}/stats/code_frequency?client_id=${clientinfo.client_id}&client_secret=${clientinfo.client_secret}`;
+    axios.get(url).then((response) => {
+      context.commit('getLoC', response.data);
+    });
+  },
 };

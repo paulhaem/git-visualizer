@@ -1,17 +1,26 @@
 <template>
   <div class="information">
     <div class="card description">
-      <h1>{{ repository.full_name }}</h1>
+      <div class="cardheader">
+        <h1>{{ repository.full_name }}</h1>
+        <a class="repolink" :href="repository.html_url" target="_blank">Open Repository</a>
+      </div>
       <div class="content">
         <h3>Description</h3>
         <p>{{ repository.description }}</p>
-        <a class="repolink" :href="repository.html_url" target="_blank">Open Repository</a>
+        <ul>
+          <li><font-awesome-icon class="arrow" size="2x" :icon="['far', 'users']"/> {{ statistics.contributors }}</li>
+          <li><font-awesome-icon class="arrow" size="2x" :icon="['far', 'plus-circle']"/> {{ statistics.additions }}</li>
+          <li><font-awesome-icon class="arrow" size="2x" :icon="['far', 'minus-circle']"/> {{ statistics.deletions }}</li>
+          <li><font-awesome-icon class="arrow" size="2x" :icon="['far', 'code']"/> {{ statistics.commits }}</li>
+          <li><font-awesome-icon class="arrow" size="2x" :icon="['far', 'align-left']"/> {{ statistics.loc }}</li>
+        </ul>
       </div>
     </div>
     <div class="card hidden" id="readme">
-      <h1> {{ readme.name }} </h1>
-      <vue-markdown>
-        {{ decode(readme.content) }}
+      <h1> Readme.md </h1>
+      <vue-markdown v-if="readme">
+        {{ readme }}
       </vue-markdown>
       <div v-on:click="toggle" id="expand">
         <font-awesome-icon id="arrow" size="3x" :icon="['far', 'angle-down']"  />
@@ -21,7 +30,6 @@
 </template>
 
 <script>
-import base64 from 'base-64';
 import VueMarkdown from 'vue-markdown';
 
 export default {
@@ -36,15 +44,26 @@ export default {
     repository() {
       return this.$store.getters.repository;
     },
+    statistics() {
+      return this.$store.getters.statistics;
+    },
+    numCommits() {
+      return this.$store.getters.numCommits;
+    }
   },
-  mounted() {
+  created() {
     const repodata = {
       owner: this.$route.params.username,
       repo: this.$route.params.reponame,
     };
-
-    this.getRepository(repodata);
-    this.getReadMe(repodata);
+    if( !this.$store.getters.repository
+    || (repodata.owner !== this.$store.getters.repository.owner.login
+    && repodata.repo !== this.$store.getters.repository)){
+      this.getReadMe(repodata);
+      this.getRepository(repodata);
+      this.getStatistics(repodata);
+      this.getCommits(repodata);
+    };
   },
   methods: {
     getRepository(repodata) {
@@ -53,15 +72,27 @@ export default {
     getReadMe(repodata) {
       this.$store.dispatch('getReadMe', repodata);
     },
-    decode(content) {
-      return base64.decode(content);
+    getStatistics(repodata) {
+      this.$store.dispatch('getStatistics', repodata);
+    },
+    getCommits(repodata) {
+      this.$store.dispatch('getCommits', repodata);
     },
     toggle() {
-      const elreadme = document.getElementById("readme");
-      elreadme.classList.toggle("hidden");
+      const elreadme = document.getElementById('readme');
+      elreadme.classList.toggle('hidden');
 
-      const elarrow = document.getElementById("arrow");
-      elarrow.classList.toggle("up");
+      const elarrow = document.getElementById('arrow');
+      elarrow.classList.toggle('up');
+    },
+  },
+  watch: {
+    // eslint-disable-next-line
+    '$route.params.username'(newName, oldName) {
+
+    },
+    'this.$store.getters.readme'(newReadme, oldReadme) {
+      $store.getters.readme = newReadme;
     }
   },
 };
@@ -77,16 +108,29 @@ export default {
   margin: 15px;
 }
 .description h1 {
-  background-color: #845C9C;
   border-radius: 5px 5px 0 0;
   color: white;
   line-height: 1.5;
+  text-align: left;
+  padding-left: .5em;
+}
+.cardheader {
+  background-color: #845C9C;
+  position: relative;
 }
 .content {
-  position: relative;
   padding: 0 1em .5em 1em;
   font-size: .75em;
 }
+.content ul {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+}
+.content ul li {
+  font-weight: bold;
+}
+
 .description h3 {
   text-align: left;
 }
@@ -95,13 +139,16 @@ export default {
 }
 .repolink {
   position: absolute;
-  right: 2em;
-  top: -.2em;
-  border: 3px #845c9c solid;
-  padding: .5em 1em;
+  right: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border: 3px white solid;
+  padding: .2em .7em;
   border-radius: 5px;
   font-weight: bold;
   text-decoration: none;
+  color: #845c9c;
 }
 .repolink:hover {
   background-color: #845c9c;
