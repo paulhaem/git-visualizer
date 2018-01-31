@@ -38,10 +38,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .results {
-  height: 700px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: space-around;
+  margin-left: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 175px 175px 175px;
+  grid-row-gap: 15px;
+  grid-column-gap: 15px;
 }
 </style>
