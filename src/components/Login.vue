@@ -7,7 +7,7 @@
     <button @click="logout" class="button logout">Logout</button>
   </div>
   <div v-else>
-    <button @click="authenticate" class="button">Login with Github</button>
+    <button @click="authenticate" class="button login"><font-awesome-icon class="arrow" size="2x" :icon="['fab', 'github']" /> <span>Login with Github</span></button>
   </div>
 </template>
 
@@ -125,6 +125,19 @@ export default {
 .button:hover {
   background-color: #845C9C;
   color: #FFFFFF;
+}
+
+.login {
+  text-align: left;
+
+  padding: 15px 5%;
+
+  display: flex;
+  align-items: center;
+}
+
+.login > span {
+  padding: 0 15px;
 }
 
 .logout {
