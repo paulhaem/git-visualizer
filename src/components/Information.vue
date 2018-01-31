@@ -30,6 +30,7 @@
 </template>
 
 <script>
+/* eslint max-len: "off" */
 import VueMarkdown from 'vue-markdown';
 
 export default {
@@ -49,21 +50,18 @@ export default {
     },
     numCommits() {
       return this.$store.getters.numCommits;
-    }
+    },
   },
   created() {
     const repodata = {
       owner: this.$route.params.username,
       repo: this.$route.params.reponame,
     };
-    if( !this.$store.getters.repository
-    || (repodata.owner !== this.$store.getters.repository.owner.login
-    && repodata.repo !== this.$store.getters.repository)){
-      this.getReadMe(repodata);
-      this.getRepository(repodata);
-      this.getStatistics(repodata);
-      this.getCommits(repodata);
-    };
+    this.getReadMe(repodata);
+    this.getRepository(repodata);
+    this.getStatistics(repodata);
+
+    this.$store.commit('addNavigation');
   },
   beforeDestroy() {
     this.$store.commit('delRepository');
@@ -78,9 +76,6 @@ export default {
     getStatistics(repodata) {
       this.$store.dispatch('getStatistics', repodata);
     },
-    getCommits(repodata) {
-      this.$store.dispatch('getCommits', repodata);
-    },
     toggle() {
       const elreadme = document.getElementById('readme');
       elreadme.classList.toggle('hidden');
@@ -88,15 +83,6 @@ export default {
       const elarrow = document.getElementById('arrow');
       elarrow.classList.toggle('up');
     },
-  },
-  watch: {
-    // eslint-disable-next-line
-    '$route.params.username'(newName, oldName) {
-
-    },
-    'this.$store.getters.readme'(newReadme, oldReadme) {
-      $store.getters.readme = newReadme;
-    }
   },
 };
 </script>
