@@ -8,4 +8,15 @@ export default {
       context.commit('getResults', response);
     });
   },
+  getUser(context, token) {
+    const url = 'https://api.github.com/user';
+
+    axios.get(url, {
+      params: {
+        access_token: token,
+      },
+    }).then((response) => {
+      context.commit('getUser', response);
+    });
+  },
 };

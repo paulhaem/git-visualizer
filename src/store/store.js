@@ -11,6 +11,9 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     results: [],
+    token: '',
+    user: {},
+    isAuthenticated: false,
   },
   getters,
   mutations,
