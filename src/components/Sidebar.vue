@@ -1,13 +1,17 @@
 <template>
   <div class="sidebar">
-
+    <Login></Login>
   </div>
 </template>
 
 <script>
+import Login from './Login';
 
 export default {
   name: 'Sidebar',
+  components: {
+    Login,
+  }
 };
 </script>
 
@@ -16,7 +20,7 @@ export default {
 .sidebar {
   width: 300px;
   height: 700px;
-  background-color: #dddddd;
+
   flex-shrink: 0;
 }
 </style>

@@ -30,6 +30,7 @@ export default {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16);
   padding-left: 10%;
   padding-right: 10%;
+  background-color: #FFFFFF;
 }
 .logo {
   background-color: #652676;
