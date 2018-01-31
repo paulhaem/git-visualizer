@@ -27,7 +27,7 @@
 
 <script>
 import Card from './Card';
-
+/* eslint max-len: "off" */
 export default {
   name: 'Home',
   components: {

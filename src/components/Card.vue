@@ -26,7 +26,7 @@
 </template>
 
 <script>
-
+/* eslint max-len: "off" */
 export default {
   name: 'Card',
   props: ['data'],
