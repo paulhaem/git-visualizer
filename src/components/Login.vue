@@ -20,12 +20,12 @@ import axios from 'axios';
 
 // Initialize Firebase
 const config = {
-  apiKey: 'AIzaSyBBUm9k3N-EzrjNNBl7ntDZ_GoBjJ34rQw',
-  authDomain: 'git-visualizer-backend.firebaseapp.com',
-  databaseURL: 'https://git-visualizer-backend.firebaseio.com',
-  projectId: 'git-visualizer-backend',
-  storageBucket: 'git-visualizer-backend.appspot.com',
-  messagingSenderId: '55090565755',
+  apiKey: "AIzaSyC4qVRo-ER91l_ZtF3h4z-Ru6uUoVejUdE",
+  authDomain: "git-visualizer.firebaseapp.com",
+  databaseURL: "https://git-visualizer.firebaseio.com",
+  projectId: "git-visualizer",
+  storageBucket: "",
+  messagingSenderId: "355349439807"
 };
 firebase.initializeApp(config);
 
