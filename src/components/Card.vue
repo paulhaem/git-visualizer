@@ -45,6 +45,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: #ffffff;
 }
 .description {
   width: 100%;

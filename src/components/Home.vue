@@ -51,6 +51,7 @@ export default {
   flex-wrap: wrap;
 }
 .card {
+  background-color: #ffffff;
   width: 100%;
   border: none;
   border-radius: 5px;

@@ -105,16 +105,18 @@ export default {
   border: none;
   border-radius: 5px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16);
-  margin: 15px;
+  margin: 0 15px 15px 15px;
+  background-color: #ffffff;
 }
 .description h1 {
-  border-radius: 5px 5px 0 0;
   color: white;
   line-height: 1.5;
   text-align: left;
   padding-left: .5em;
+  margin-top: 0;
 }
 .cardheader {
+  border-radius: 5px 5px 0 0;
   background-color: #845C9C;
   position: relative;
 }
