@@ -64,6 +64,7 @@ export default {
 }
 .h2wrapper {
   background-color: #845C9C;
+  border-radius: 5px 0 0 5px;
 }
 .card {
   text-align: center;
