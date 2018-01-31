@@ -10,5 +10,16 @@ export default {
   },
   isAuthenticated(state) {
     return state.isAuthenticated;
+  toprepos(state) {
+    return state.toprepos;
+  },
+  repository(state) {
+    return state.repository;
+  },
+  readme(state) {
+    return state.readme;
+  },
+  statistics(state) {
+    return state.statistics;
   },
 };
