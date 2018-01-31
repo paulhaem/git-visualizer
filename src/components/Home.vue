@@ -16,7 +16,7 @@
     </div>
     <p>On the top you can search for repositories of other users and get new knowledge by comparing workflows and statistics.</p>
   </div>
-  <div class="card">
+  <div class="card info">
     <p>Hop right into one of the following top repositories and have a look for yourself:</p>
   </div>
   <div class="wrapper">
@@ -47,8 +47,18 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .home {
-  display: flex;
-  flex-wrap: wrap;
+  margin-left: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 8em 175px 3em 1fr;
+  grid-row-gap: 15px;
+  grid-column-gap: 15px;
+}
+.intro {
+  grid-column-start: span 2;
+}
+.info {
+  grid-column-start: span 2;
 }
 .card {
   background-color: #ffffff;
@@ -56,10 +66,9 @@ export default {
   border: none;
   border-radius: 5px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16);
-  margin: 0 15px 15px 15px;
 }
 .two {
-  width: calc(50% - 30px);
+  width: 100%;
   display: flex;
 }
 .h2wrapper {
@@ -70,8 +79,11 @@ export default {
   text-align: center;
 }
 .wrapper {
-  display: flex;
-  justify-content: space-around;
+  grid-column-start: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 175px;
+  grid-column-gap: 15px;
 }
 h1 {
   color: #845C9C;
