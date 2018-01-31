@@ -56,7 +56,7 @@ export default {
   border: none;
   border-radius: 5px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16);
-  margin: 15px;
+  margin: 0 15px 15px 15px;
 }
 .two {
   width: calc(50% - 30px);
