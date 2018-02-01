@@ -52,7 +52,7 @@ export default {
       return this.$store.getters.numCommits;
     },
   },
-  mounted() {
+  beforeMount() {
     const repodata = {
       owner: this.$route.params.username,
       repo: this.$route.params.reponame,
