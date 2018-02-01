@@ -66,6 +66,11 @@ export default {
   beforeDestroy() {
     this.$store.commit('delReadme');
   },
+  data() {
+    return {
+
+    };
+  },
   methods: {
     getRepository(repodata) {
       this.$store.dispatch('getRepository', repodata);
@@ -82,6 +87,19 @@ export default {
 
       const elarrow = document.getElementById('arrow');
       elarrow.classList.toggle('up');
+    },
+  },
+  watch: {
+    // eslint-disable-next-line
+    '$route.params.reponame'(newReponame, oldReponame) {
+      const repodata = {
+        owner: this.$route.params.username,
+        repo: this.$route.params.reponame,
+      };
+      this.$store.commit('delReadme');
+      this.getReadMe(repodata);
+      this.getRepository(repodata);
+      this.getStatistics(repodata);
     },
   },
 };
