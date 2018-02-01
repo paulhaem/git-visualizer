@@ -52,7 +52,7 @@ export default {
     }
     state.statistics.loc = loc;
   },
-  delRepository(state) {
+  delReadme(state) {
     console.log('deleting..');
     state.readme = '';
   },

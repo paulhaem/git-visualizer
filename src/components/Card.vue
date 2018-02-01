@@ -36,8 +36,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .card {
-  width: 30%;
-  margin: 5px;
+  margin: 0;
   border: none;
   border-radius: 5px;
   height: 175px;
