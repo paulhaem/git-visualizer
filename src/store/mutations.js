@@ -76,4 +76,7 @@ export default {
   getUserRepos(state, response) {
     state.userrepos = response.data;
   },
+  delCommits(state) {
+    state.commits = [];
+  },
 };
