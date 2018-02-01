@@ -26,12 +26,12 @@ export default {
       context.commit('addTopRepo', response.data);
     });
     // get react
-    url = `https://api.github.com/repos/facebook/react?client_id=${clientinfo.client_id}&client_secret=${clientinfo.client_secret}`;
+    url = `https://api.github.com/repos/gohugoio/hugo?client_id=${clientinfo.client_id}&client_secret=${clientinfo.client_secret}`;
     axios.get(url).then((response) => {
       context.commit('addTopRepo', response.data);
     });
     // get angular
-    url = `https://api.github.com/repos/angular/angular?client_id=${clientinfo.client_id}&client_secret=${clientinfo.client_secret}`;
+    url = `https://api.github.com/repos/nuxt/nuxt.js?client_id=${clientinfo.client_id}&client_secret=${clientinfo.client_secret}`;
     axios.get(url).then((response) => {
       context.commit('addTopRepo', response.data);
     });
