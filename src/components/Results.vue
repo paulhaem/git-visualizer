@@ -52,7 +52,7 @@ export default {
 }
 .card {
   margin: 0 7.5px 15px 7.5px;
-  flex-grow: 1;
+  flex-grow: 0;
   width: calc(100% * (1/3) - 16px);
 }
 .load {
