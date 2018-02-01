@@ -55,6 +55,15 @@ export default {
   delReadme(state) {
     state.readme = '';
   },
+  delStatistics(state) {
+    state.statistics = {
+      contributors: 0,
+      additions: 0,
+      deletions: 0,
+      commits: 0,
+      loc: 0,
+    };
+  },
   setDisplayNavigation(state, flag) {
     state.displayNavigation = flag;
   },
