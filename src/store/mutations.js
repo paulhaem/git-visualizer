@@ -56,4 +56,10 @@ export default {
     console.log('deleting..');
     state.readme = '';
   },
+  getCommits(state, repository) {
+    state.repository = repository;
+  },
+  setCommits(state, commits) {
+    state.commits = commits;
+  },
 };

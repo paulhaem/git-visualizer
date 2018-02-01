@@ -17,6 +17,7 @@ export const store = new Vuex.Store({
     toprepos: [],
     repository: '',
     readme: '',
+    commits: [],
     statistics: {
       contributors: 0,
       additions: 0,

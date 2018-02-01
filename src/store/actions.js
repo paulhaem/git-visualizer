@@ -1,4 +1,5 @@
 import axios from 'axios';
+import parse from 'parse-link-header';
 import clientinfo from './clientinfo';
 
 export default {
@@ -56,6 +57,74 @@ export default {
     url = `https://api.github.com/repos/${repodata.owner}/${repodata.repo}/stats/code_frequency?client_id=${clientinfo.client_id}&client_secret=${clientinfo.client_secret}`;
     axios.get(url).then((response) => {
       context.commit('getLoC', response.data);
+    });
+  },
+  getCommits(context, repodata) {
+    const token = repodata.token;
+    let commits = [];
+    const url = `https://api.github.com/repos/${repodata.owner}/${repodata.repo}/commits`;
+
+    // Initial API call
+    const curPage = 1;
+    let lastPage = 1;
+
+    axios.get(url, {
+      params: {
+        // access_token: token,
+        per_page: 100,
+      },
+    }).then((response) => {
+      // add found commits to the commits array
+      commits = commits.concat(response.data);
+
+      // parse new link object
+      const link = response.headers.link;
+      const linkParsed = parse(link);
+
+      // determine last page number
+      if ('last' in linkParsed) {
+        lastPage = parseInt(linkParsed.last.page, 10);
+      }
+      const payload = {
+        commits,
+        url: linkParsed.next.url,
+        curPage: curPage + 1,
+        lastPage,
+        // token,
+      };
+
+      context.dispatch('recursiveGetCommits', payload);
+    });
+
+    // context.commit('getUser', commits);
+  },
+  recursiveGetCommits(context, payload) {
+    axios.get(payload.url, {
+      params: {
+        // access_token: payload.token,
+        per_page: 100,
+      },
+    }).then((response) => {
+      // add found commits to the commits array
+      const newCommits = payload.commits.concat(response.data);
+
+      // parse new link object
+      const link = response.headers.link;
+      const linkParsed = parse(link);
+
+      if (payload.curPage < payload.lastPage) {
+        const newPayload = {
+          context,
+          commits: newCommits,
+          url: linkParsed.next.url,
+          curPage: payload.curPage + 1,
+          lastPage: payload.lastPage,
+          // token: payload.token,
+        };
+        return this.recursiveGetCommits(newPayload);
+      } else if (payload.curPage === payload.lastPage) {
+        context.commit('setCommits', newCommits);
+      }
     });
   },
 };

@@ -1,17 +1,34 @@
 <template>
   <div class="commits">
-    Commits
+    <p v-for="commit in commits" :key="commit.id">{{ commit.commit.message }}</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Commits',
+  computed: {
+    commits() {
+      return this.$store.getters.commits;
+    }
+  },
+  created() {
+    const repodata = {
+      owner: this.$route.params.username,
+      repo: this.$route.params.reponame,
+      token: this.$store.getters.token,
+    };
 
+    this.getCommits(repodata);
+  },
+  methods: {
+    getCommits(repodata) {
+      this.$store.dispatch('getCommits', repodata);
+    }
+  }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 </style>

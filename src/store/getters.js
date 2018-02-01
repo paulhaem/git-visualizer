@@ -23,4 +23,7 @@ export default {
   statistics(state) {
     return state.statistics;
   },
+  commits(state) {
+    return state.commits;
+  },
 };
