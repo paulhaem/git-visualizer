@@ -7,7 +7,9 @@
 <script>
 export default {
   name: 'Commits',
-
+  mounted() {
+    this.$store.commit('setDisplayNavigation', true);
+  },
 };
 </script>
 

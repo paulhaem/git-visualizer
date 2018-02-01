@@ -7,6 +7,9 @@
 <script>
 export default {
   name: 'Dashboard',
+  mounted() {
+    this.$store.commit('setDisplayNavigation', false);
+  },
 
 };
 </script>

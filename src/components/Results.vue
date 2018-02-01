@@ -18,7 +18,7 @@ export default {
     },
   },
   mounted() {
-    // save search results to store
+    this.$store.commit('setDisplayNavigation', false);
     this.getResults(this.$route.params.data);
   },
   methods: {

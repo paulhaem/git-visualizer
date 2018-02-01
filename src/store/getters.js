@@ -23,4 +23,7 @@ export default {
   statistics(state) {
     return state.statistics;
   },
+  navigation(state) {
+    return state.displayNavigation;
+  },
 };

@@ -56,4 +56,7 @@ export default {
     console.log('deleting..');
     state.readme = '';
   },
+  setDisplayNavigation(state, flag) {
+    state.displayNavigation = flag;
+  },
 };

@@ -61,7 +61,7 @@ export default {
     this.getRepository(repodata);
     this.getStatistics(repodata);
 
-    this.$store.commit('addNavigation');
+    this.$store.commit('setDisplayNavigation', true);
   },
   beforeDestroy() {
     this.$store.commit('delReadme');

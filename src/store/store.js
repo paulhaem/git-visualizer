@@ -24,6 +24,7 @@ export const store = new Vuex.Store({
       commits: 0,
       loc: 0,
     },
+    displayNavigation: false,
   },
   getters,
   mutations,
