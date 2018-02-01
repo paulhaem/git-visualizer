@@ -97,6 +97,8 @@ export default {
         };
 
         context.dispatch('recursiveGetCommits', payload);
+      } else {
+        context.commit('setCommits', commits);
       }
     });
 
