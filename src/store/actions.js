@@ -58,4 +58,14 @@ export default {
       context.commit('getLoC', response.data);
     });
   },
+  getUserRepos(context, token) {
+    const url = 'https://api.github.com/user/repos?sort=updated';
+    axios.get(url, {
+      params: {
+        access_token: token,
+      },
+    }).then((response) => {
+      context.commit('getUserRepos', response);
+    });
+  },
 };

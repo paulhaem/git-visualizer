@@ -26,4 +26,7 @@ export default {
   navigation(state) {
     return state.displayNavigation;
   },
+  userrepos(state) {
+    return state.userrepos;
+  },
 };

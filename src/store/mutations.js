@@ -53,10 +53,12 @@ export default {
     state.statistics.loc = loc;
   },
   delReadme(state) {
-    console.log('deleting..');
     state.readme = '';
   },
   setDisplayNavigation(state, flag) {
     state.displayNavigation = flag;
+  },
+  getUserRepos(state, response) {
+    state.userrepos = response.data;
   },
 };

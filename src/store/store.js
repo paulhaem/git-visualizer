@@ -25,6 +25,7 @@ export const store = new Vuex.Store({
       loc: 0,
     },
     displayNavigation: false,
+    userrepos: '',
   },
   getters,
   mutations,
