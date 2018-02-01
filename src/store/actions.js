@@ -76,7 +76,6 @@ export default {
         per_page: 100,
       },
     }).then((response) => {
-      console.log(response);
       // add found commits to the commits array
       commits = commits.concat(response.data);
       if (response.headers.link) {
