@@ -78,7 +78,9 @@ export default {
       {
         if(!this.$store.state.isAuthenticated)
         {
-          const token = this.$session.get('token')
+          const token = this.$session.get('token');
+          this.$store.commit('setToken', token);
+
           this.$store.dispatch('getUser', token);
 
           this.$store.commit('setAuthentication', true);
