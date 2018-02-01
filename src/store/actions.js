@@ -70,30 +70,34 @@ export default {
 
     axios.get(url, {
       params: {
+        client_id: clientinfo.client_id,
+        client_secret: clientinfo.client_secret,
         // access_token: token,
         per_page: 100,
       },
     }).then((response) => {
+      console.log(response);
       // add found commits to the commits array
       commits = commits.concat(response.data);
+      if (response.headers.link) {
+        // parse new link object
+        const link = response.headers.link;
+        const linkParsed = parse(link);
 
-      // parse new link object
-      const link = response.headers.link;
-      const linkParsed = parse(link);
-
-      // determine last page number
-      if ('last' in linkParsed) {
-        lastPage = parseInt(linkParsed.last.page, 10);
-      }
-      const payload = {
-        commits,
-        url: linkParsed.next.url,
-        curPage: curPage + 1,
-        lastPage,
+        // determine last page number
+        if ('last' in linkParsed) {
+          lastPage = parseInt(linkParsed.last.page, 10);
+        }
+        const payload = {
+          commits,
+          url: linkParsed.next.url,
+          curPage: curPage + 1,
+          lastPage,
         // token,
-      };
+        };
 
-      context.dispatch('recursiveGetCommits', payload);
+        context.dispatch('recursiveGetCommits', payload);
+      }
     });
 
     // context.commit('getUser', commits);
