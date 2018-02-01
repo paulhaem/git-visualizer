@@ -64,7 +64,7 @@ export default {
     this.$store.commit('addNavigation');
   },
   beforeDestroy() {
-    this.$store.commit('delRepository');
+    this.$store.commit('delReadme');
   },
   methods: {
     getRepository(repodata) {
