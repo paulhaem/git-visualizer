@@ -121,7 +121,7 @@ export default {
           lastPage: payload.lastPage,
           // token: payload.token,
         };
-        return this.recursiveGetCommits(newPayload);
+        context.dispatch('recursiveGetCommits', newPayload);
       } else if (payload.curPage === payload.lastPage) {
         context.commit('setCommits', newCommits);
       }
