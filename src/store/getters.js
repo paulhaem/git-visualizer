@@ -26,4 +26,10 @@ export default {
   commits(state) {
     return state.commits;
   },
+  navigation(state) {
+    return state.displayNavigation;
+  },
+  userrepos(state) {
+    return state.userrepos;
+  },
 };

@@ -25,7 +25,10 @@ export default {
     getCommits(repodata) {
       this.$store.dispatch('getCommits', repodata);
     }
-  }
+  },
+  mounted() {
+    this.$store.commit('setDisplayNavigation', true);
+  },
 };
 </script>
 

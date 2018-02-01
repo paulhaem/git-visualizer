@@ -3,19 +3,19 @@
       <router-link v-if="isAuthenticated" class="nav-link" :to="{ name: 'Dashboard' }">
       Dashboard
       </router-link>
-      <router-link v-if="repository" class="nav-link" :to="{ name: 'Information', params: {
+      <router-link v-if="navigation && repository" class="nav-link" :to="{ name: 'Information', params: {
         username: repository.owner.login,
         reponame: repository.name }}
       ">
         Information
       </router-link>
-      <router-link v-if="repository" class="nav-link"  :to="{ name: 'Commits', params: {
+      <router-link v-if="navigation && repository" class="nav-link"  :to="{ name: 'Commits', params: {
         username: repository.owner.login,
         reponame: repository.name }}
       ">
         Commits
       </router-link>
-      <router-link v-if="repository" class="nav-link"  :to="{ name: 'Contributors', params: {
+      <router-link v-if="navigation && repository" class="nav-link"  :to="{ name: 'Contributors', params: {
         username: repository.owner.login,
         reponame: repository.name }}
       ">

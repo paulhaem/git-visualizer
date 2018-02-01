@@ -40,6 +40,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('getTopRepos');
+    this.$store.commit('setDisplayNavigation', false);
   },
 };
 </script>

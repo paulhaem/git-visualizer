@@ -1,13 +1,16 @@
 <template>
   <div v-if="isAuthenticated">
-    <div class="container">
-      <img v-bind:src="user.avatar_url" alt="Avatar" class="avatar">
-      <p class="usermessage">Logged in as <span class="username">{{ user.login }}</span>.</p>
+    <div class="card container">
+      <a v-bind:href="user.html_url" target="_blank">
+        <img v-bind:src="user.avatar_url" alt="Avatar" class="avatar">
+      </a>
+      <p class="usermessage">Logged in as <a v-bind:href="user.html_url" target="_blank" class="username">{{ user.login }}</a>.</p>
     </div>
-    <button @click="logout" class="button logout">Logout</button>
+    <UserRepos class="card userrepos" />
+    <button @click="logout" class="card button logout">Logout</button>
   </div>
   <div v-else>
-    <button @click="authenticate" class="button login"><font-awesome-icon class="arrow" size="2x" :icon="['fab', 'github']" /> <span>Login with Github</span></button>
+    <button @click="authenticate" class="card button login"><font-awesome-icon class="arrow" size="2x" :icon="['fab', 'github']" /> <span>Login with Github</span></button>
   </div>
 </template>
 
@@ -17,6 +20,7 @@ import * as firebase from 'firebase';
 
 import Vue from 'vue'
 import axios from 'axios';
+import UserRepos from './UserRepos';
 
 // Initialize Firebase
 const config = {
@@ -42,6 +46,9 @@ export default {
       access_token: null,
       response: null
     }
+  },
+  components: {
+    UserRepos
   },
   mounted() {
     this.checkSession();
@@ -82,6 +89,7 @@ export default {
           this.$store.commit('setToken', token);
 
           this.$store.dispatch('getUser', token);
+          this.$store.dispatch('getUserRepos', token);
 
           this.$store.commit('setAuthentication', true);
         }
@@ -110,11 +118,9 @@ export default {
 
   background-color: #FFFFFF;
   border: none;
-  border-radius: 5px;
+
 
   padding: 15px 10%;
-
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16);
 
   font-size: 20px;
   font-weight: bold;
@@ -122,6 +128,16 @@ export default {
 
   cursor: pointer;
   transition: .20s;
+}
+
+.card {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.userrepos {
+  background-color: #ffffff;
 }
 
 .button:hover {
@@ -148,8 +164,6 @@ export default {
   border-width: 3px;
 
   color: #E16989;
-
-  margin-top: 15px;
 }
 
 .logout:hover {
@@ -161,11 +175,8 @@ export default {
 .container {
   background-color: #FFFFFF;
   border: none;
-  border-radius: 5px;
 
   padding: 15px 10%;
-
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16);
 }
 
 .avatar {
@@ -186,6 +197,10 @@ export default {
 
 .username {
   color: #845C9C;
+  text-decoration: none;
+}
+.username:hover {
+  text-decoration: underline;
 }
 
 </style>

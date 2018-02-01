@@ -53,7 +53,6 @@ export default {
     state.statistics.loc = loc;
   },
   delReadme(state) {
-    console.log('deleting..');
     state.readme = '';
   },
   getCommits(state, repository) {
@@ -61,5 +60,20 @@ export default {
   },
   setCommits(state, commits) {
     state.commits = commits;
+  },
+  delStatistics(state) {
+    state.statistics = {
+      contributors: 0,
+      additions: 0,
+      deletions: 0,
+      commits: 0,
+      loc: 0,
+    };
+  },
+  setDisplayNavigation(state, flag) {
+    state.displayNavigation = flag;
+  },
+  getUserRepos(state, response) {
+    state.userrepos = response.data;
   },
 };
