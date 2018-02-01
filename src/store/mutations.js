@@ -55,9 +55,6 @@ export default {
   delReadme(state) {
     state.readme = '';
   },
-  getCommits(state, repository) {
-    state.repository = repository;
-  },
   setCommits(state, commits) {
     state.commits = commits;
   },
