@@ -72,7 +72,6 @@ export default {
   },
   getCommits(context, repodata) {
     const token = repodata.token;
-    console.log(repodata);
     let commits = [];
     const url = `https://api.github.com/repos/${repodata.owner}/${repodata.repo}/commits`;
 
