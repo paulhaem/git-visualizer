@@ -50,7 +50,7 @@ export default {
   components: {
     UserRepos
   },
-  mounted() {
+  beforeMount() {
     this.checkSession();
   },
   methods: {
