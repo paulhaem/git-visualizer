@@ -52,6 +52,9 @@ export default {
   },
   beforeMount() {
     this.checkSession();
+    if(this.$store.getters.token) {
+      this.getUserRepos(this.$store.getters.token);
+    }
   },
   methods: {
     authenticate() {
