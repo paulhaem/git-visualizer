@@ -1,6 +1,6 @@
 <template>
-  <div class="commits" v-if="commits">
-    <div class="card">
+  <div class="commits">
+    <div class="card" v-if="commits.length > 0">
       <div class="cardheader">
         <h1>Commits</h1>
       </div>
@@ -8,19 +8,26 @@
         <div id="chart"></div>
       </div>
     </div>
+    <div v-if="commits.length === 0">
+      LOADING
+    </div>
   </div>
 </template>
 
 <script>
 
 import c3 from 'c3';
+import './../assets/c3.min.css'
 
 export default {
   name: 'Commits',
   computed: {
     commits() {
       return this.$store.getters.commits;
-    }
+    },
+    commitTypes() {
+      return this.$store.getters.commitTypes;
+    },
   },
   beforeMount() {
     const repodata = {
@@ -31,31 +38,14 @@ export default {
     this.getRepository(repodata);
     this.getCommits(repodata);
     this.$store.commit('setDisplayNavigation', true);
-  },
-  mounted() {
-    c3.generate({
-      bindto: '#chart',
-      data: {
-        columns: [
-          ['Categories', 50, 100, 150, 200, 150, 100, 50]
-        ],
-        type: 'bar',
-      },
-      axis: {
-        x: {
-          type: 'category',
-          categories: ['chore', 'docs', 'feat', 'fix', 'refactor', 'style', 'test'],
-        }
-      },
-      bar: {
-        width: {
-          ratio: 0.5,
-        }
-      }
-    });
+
+
   },
   beforeDestroy() {
     this.$store.commit('delCommits');
+  },
+  updated() {
+    this.createChart(this.$store.getters.commitTypes);
   },
   methods: {
     getRepository(repodata) {
@@ -64,6 +54,47 @@ export default {
     getCommits(repodata) {
       this.$store.dispatch('getCommits', repodata);
     },
+    createChart(commitTypes) {
+      const chores = ['chores', commitTypes.chores];
+      const docs = ['docs', commitTypes.docs];
+      const feat = ['feat', commitTypes.feat];
+      const fix = ['fix', commitTypes.fix];
+      const refactor = ['refactor', commitTypes.refactor];
+      const style = ['style', commitTypes.style];
+      const test = ['test', commitTypes.test];
+      const notSemantic = ['undefined', commitTypes.notSemantic];
+
+      c3.generate({
+      bindto: '#chart',
+      data: {
+        columns: [
+          chores,
+          docs,
+          feat,
+          fix,
+          refactor,
+          style,
+          test,
+          notSemantic
+        ],
+        type: 'bar',
+      },
+      axis: {
+        x: {
+          type: 'category',
+          categories: [''],
+        }
+      },
+      bar: {
+        width: {
+          ratio: 0.5,
+        }
+      },
+      color: {
+        pattern: ['#F1524F', '#DE8051', '#F8A147', '#77AE6D', '#74ADAB', '#47BED6', '#62CAEF', '#888888'],
+      },
+    })
+    }
   },
   watch: {
     // eslint-disable-next-line
