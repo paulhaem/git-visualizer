@@ -54,6 +54,7 @@ export default {
   margin: 0 7.5px 15px 7.5px;
   flex-grow: 0;
   width: calc(100% * (1/3) - 16px);
+  min-width: 200px;
 }
 .load {
   border-radius: 5px;
