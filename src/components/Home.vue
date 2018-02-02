@@ -71,10 +71,18 @@ export default {
 .two {
   width: 100%;
   display: flex;
+  align-items: center;
+}
+.two p {
+  padding: 1em;
 }
 .h2wrapper {
   background-color: #845C9C;
   border-radius: 5px 0 0 5px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .card {
   text-align: center;
@@ -91,7 +99,7 @@ h1 {
 }
 h2 {
   color: #ffffff;
-  transform: rotate(-90deg)  translateY(.4em) translateX(-1em);;
+  transform: rotate(-90deg)  translateY(.4em);
   transform-origin: center center;
   width: 100%;
   height: 2em;
