@@ -65,4 +65,53 @@ export default {
     });
     return types;
   },
+  commitTypesByUser(state) {
+    const types = [];
+    const commits = state.commits;
+    commits.forEach((commit) => {
+      let found = false;
+      let foundId;
+      for (let i = 0; i < types.length; i += 1) {
+        if (types[i].id === commit.author.id) {
+          found = true;
+          foundId = i;
+          break;
+        }
+      }
+      if (found) {
+        if (commit.commit.message.startsWith('chore:')) {
+          types[foundId].chores += 1;
+        } else if (commit.commit.message.startsWith('docs:')) {
+          types[foundId].docs += 1;
+        } else if (commit.commit.message.startsWith('feat:')) {
+          types[foundId].feat += 1;
+        } else if (commit.commit.message.startsWith('fix:')) {
+          types[foundId].fix += 1;
+        } else if (commit.commit.message.startsWith('refactor:')) {
+          types[foundId].refactor += 1;
+        } else if (commit.commit.message.startsWith('style:')) {
+          types[foundId].style += 1;
+        } else if (commit.commit.message.startsWith('test:')) {
+          types[foundId].test += 1;
+        } else {
+          types[foundId].notSemantic += 1;
+        }
+      } else {
+        types.push({
+          id: commit.author.id,
+          avatar_url: commit.author.avatar_url,
+          login: commit.author.login,
+          chores: 0,
+          docs: 0,
+          feat: 0,
+          fix: 0,
+          refactor: 0,
+          style: 0,
+          test: 0,
+          notSemantic: 0,
+        });
+      }
+    });
+    return types;
+  },
 };
