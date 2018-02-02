@@ -18,7 +18,7 @@ export default {
       repo: this.$route.params.reponame,
       token: this.$store.getters.token,
     };
-    console.log(repodata.token);
+    this.getRepository(repodata);
     this.getCommits(repodata);
     this.$store.commit('setDisplayNavigation', true);
   },
@@ -26,9 +26,12 @@ export default {
     this.$store.commit('delCommits');
   },
   methods: {
+    getRepository(repodata) {
+      this.$store.dispatch('getRepository', repodata);
+    },
     getCommits(repodata) {
       this.$store.dispatch('getCommits', repodata);
-    }
+    },
   },
   watch: {
     // eslint-disable-next-line
