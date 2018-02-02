@@ -91,7 +91,7 @@ export default {
 }
 
 /* Language Coloring */
-.language {
+.language { /* fallback pink */
   color: #ff69b4;
 }
 
@@ -108,8 +108,17 @@ export default {
 .typescript {
   color: orange;
 }
-.coffescript {
-  color: cyan;
+.coffeescript {
+  color: #777777;
+}
+.haskell {
+  color: #00cccc;
+}
+.java {
+  color: #cc00cc;
+}
+.go {
+  color: #aacc00;
 }
 .ruby {
   color: red;
@@ -128,5 +137,23 @@ export default {
 }
 .css {
   color: purple;
+}
+.objective-j {
+  color: #cc77cc;
+}
+.scala {
+  color: #cc0033;
+}
+.dart {
+  color: #cc7700;
+}
+.vue {
+  color: #13a7fc;
+}
+.c {
+  color: #c9739c;
+}
+.objective-c {
+  color: #00cf1f;
 }
 </style>
