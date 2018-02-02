@@ -57,6 +57,9 @@ export default {
     }
   },
   methods: {
+    getUserRepos(token) {
+      this.$store.dispatch('getUserRepos', token);
+    },
     authenticate() {
       firebase.auth().signInWithPopup(provider).then((result) => {
         const token = result.credential.accessToken;
