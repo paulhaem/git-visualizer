@@ -68,6 +68,7 @@ export default {
     const repodata = {
       owner: this.$route.params.username,
       repo: this.$route.params.reponame,
+      token: this.$store.getters.token,
     };
     this.getReadMe(repodata);
     this.getRepository(repodata);

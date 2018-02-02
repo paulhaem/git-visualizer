@@ -11,7 +11,6 @@ export default {
   },
   getUser(context, token) {
     const url = 'https://api.github.com/user';
-
     axios.get(url, {
       params: {
         access_token: token,
@@ -39,19 +38,31 @@ export default {
   },
   getRepository(context, repodata) {
     const url = `https://api.github.com/repos/${repodata.owner}/${repodata.repo}?client_id=${clientinfo.client_id}&client_secret=${clientinfo.client_secret}`;
-    axios.get(url).then((response) => {
+    axios.get(url, {
+      params: {
+        access_token: repodata.token,
+      },
+    }).then((response) => {
       context.commit('getRepository', response.data);
     });
   },
   getReadMe(context, repodata) {
     const url = `https://api.github.com/repos/${repodata.owner}/${repodata.repo}/readme?client_id=${clientinfo.client_id}&client_secret=${clientinfo.client_secret}`;
-    axios.get(url).then((response) => {
+    axios.get(url, {
+      params: {
+        access_token: repodata.token,
+      },
+    }).then((response) => {
       context.commit('getReadMe', response.data);
     });
   },
   getStatistics(context, repodata) {
     let url = `https://api.github.com/repos/${repodata.owner}/${repodata.repo}/stats/contributors?client_id=${clientinfo.client_id}&client_secret=${clientinfo.client_secret}`;
-    axios.get(url).then((response) => {
+    axios.get(url, {
+      params: {
+        access_token: repodata.token,
+      },
+    }).then((response) => {
       context.commit('getStatistics', response.data);
     });
     url = `https://api.github.com/repos/${repodata.owner}/${repodata.repo}/stats/code_frequency?client_id=${clientinfo.client_id}&client_secret=${clientinfo.client_secret}`;
@@ -61,6 +72,7 @@ export default {
   },
   getCommits(context, repodata) {
     const token = repodata.token;
+    console.log(repodata);
     let commits = [];
     const url = `https://api.github.com/repos/${repodata.owner}/${repodata.repo}/commits`;
 
@@ -72,11 +84,10 @@ export default {
       params: {
         client_id: clientinfo.client_id,
         client_secret: clientinfo.client_secret,
-        // access_token: token,
+        access_token: token,
         per_page: 100,
       },
     }).then((response) => {
-      console.log(response);
       // add found commits to the commits array
       commits = commits.concat(response.data);
       if (response.headers.link) {
@@ -93,7 +104,7 @@ export default {
           url: linkParsed.next.url,
           curPage: curPage + 1,
           lastPage,
-        // token,
+          token,
         };
 
         context.dispatch('recursiveGetCommits', payload);
@@ -107,7 +118,7 @@ export default {
   recursiveGetCommits(context, payload) {
     axios.get(payload.url, {
       params: {
-        // access_token: payload.token,
+        access_token: payload.token,
         per_page: 100,
       },
     }).then((response) => {
@@ -125,7 +136,7 @@ export default {
           url: linkParsed.next.url,
           curPage: payload.curPage + 1,
           lastPage: payload.lastPage,
-          // token: payload.token,
+          token: payload.token,
         };
         context.dispatch('recursiveGetCommits', newPayload);
       } else if (payload.curPage === payload.lastPage) {

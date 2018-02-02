@@ -18,6 +18,7 @@ export default {
       repo: this.$route.params.reponame,
       token: this.$store.getters.token,
     };
+    console.log(repodata.token);
     this.getCommits(repodata);
     this.$store.commit('setDisplayNavigation', true);
   },

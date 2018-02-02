@@ -20,6 +20,7 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home,
+      meta: { title: 'GitVisualizer' },
     },
     {
       path: '*',
@@ -31,6 +32,7 @@ export default new Router({
       path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard,
+      meta: { title: 'GitVisualizer - Dashboard' },
       beforeEnter: (to, from, next) => {
         if (store.getters.isAuthenticated) {
           next();
@@ -45,21 +47,25 @@ export default new Router({
       path: '/repo/:username/:reponame/information',
       name: 'Information',
       component: Information,
+      meta: { title: 'GitVisualizer - Information' },
     },
     {
       path: '/repo/:username/:reponame/commits',
       name: 'Commits',
       component: Commits,
+      meta: { title: 'GitVisualizer - Commits' },
     },
     {
       path: '/repo/:username/:reponame/contributors',
       name: 'Contributors',
       component: Contributors,
+      meta: { title: 'GitVisualizer - Contributors' },
     },
     {
       path: '/results/:data',
       name: 'Results',
       component: Results,
+      meta: { title: 'GitVisualizer - Search Results' },
     },
   ],
 });
