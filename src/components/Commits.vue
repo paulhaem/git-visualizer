@@ -5,6 +5,11 @@
         <h1>Commits</h1>
       </div>
       <div class="content">
+        <vue-slider v-model="range" v-bind="options"></vue-slider>
+      </div>
+    </div>
+    <div class="card" v-if="commitsLoaded">
+      <div class="content chart-container">
         <div id="chart"></div>
       </div>
     </div>
@@ -16,11 +21,47 @@
 
 <script>
 
+import vueSlider from 'vue-slider-component';
 import c3 from 'c3';
-import './../assets/c3.min.css'
+import './../assets/c3.min.css';
 
 export default {
   name: 'Commits',
+  data() {
+    return {
+      range: ['2018-04-01', '2018-04-10'],
+      options: {
+        width: "90%",
+        height: 4,
+        style: {
+          "margin": "5% 5% 2.5% 5%",
+        },
+        dotSize: 14,
+        min: 1,
+        max: 100,
+        interval: 3,
+        disabled: false,
+        show: true,
+        tooltip: "always",
+        piecewise: true,
+        data: [
+          "2018-04-01",
+          "2018-04-02",
+          "2018-04-03",
+          "2018-04-04",
+          "2018-04-05",
+          "2018-04-06",
+          "2018-04-07",
+          "2018-04-08",
+          "2018-04-09",
+          "2018-04-10"
+        ],
+      },
+    }
+  },
+  components: {
+    vueSlider,
+  },
   computed: {
     commitsLoaded() {
       if(this.$store.getters.commitsLength > 0)
@@ -148,6 +189,10 @@ export default {
 
 .content {
   padding: 0 1em .5em 1em;
+}
+
+.chart-container {
+  padding: 1em;
 }
 
 #chart {

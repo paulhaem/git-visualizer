@@ -25,6 +25,7 @@
     "vue-markdown": "^2.2.4",
     "vue-router": "^3.0.1",
     "vue-session": "^1.0.0",
+    "vue-slider-component": "^2.5.3",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
