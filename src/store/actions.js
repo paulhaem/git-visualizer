@@ -72,7 +72,7 @@ export default {
   },
   getCommits(context, repodata) {
     const token = repodata.token;
-    let commits = [];
+    // const commits = [];
     const url = `https://api.github.com/repos/${repodata.owner}/${repodata.repo}/commits`;
 
     // Initial API call
@@ -88,7 +88,8 @@ export default {
       },
     }).then((response) => {
       // add found commits to the commits array
-      commits = commits.concat(response.data);
+      context.commit('updateCommits', response.data);
+
       if (response.headers.link) {
         // parse new link object
         const link = response.headers.link;
@@ -99,7 +100,7 @@ export default {
           lastPage = parseInt(linkParsed.last.page, 10);
         }
         const payload = {
-          commits,
+          // commits,
           url: linkParsed.next.url,
           curPage: curPage + 1,
           lastPage,
@@ -107,8 +108,6 @@ export default {
         };
 
         context.dispatch('recursiveGetCommits', payload);
-      } else {
-        context.commit('setCommits', commits);
       }
     });
 
@@ -122,7 +121,7 @@ export default {
       },
     }).then((response) => {
       // add found commits to the commits array
-      const newCommits = payload.commits.concat(response.data);
+      context.commit('updateCommits', response.data);
 
       // parse new link object
       const link = response.headers.link;
@@ -131,15 +130,13 @@ export default {
       if (payload.curPage < payload.lastPage) {
         const newPayload = {
           context,
-          commits: newCommits,
+          // commits: newCommits,
           url: linkParsed.next.url,
           curPage: payload.curPage + 1,
           lastPage: payload.lastPage,
           token: payload.token,
         };
         context.dispatch('recursiveGetCommits', newPayload);
-      } else if (payload.curPage === payload.lastPage) {
-        context.commit('setCommits', newCommits);
       }
     });
   },

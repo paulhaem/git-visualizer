@@ -1,6 +1,6 @@
 <template>
   <div class="commits">
-    <div class="card" v-if="commits.length > 0">
+    <div class="card" v-if="commitsLoaded">
       <div class="cardheader">
         <h1>Commits</h1>
       </div>
@@ -8,8 +8,8 @@
         <div id="chart"></div>
       </div>
     </div>
-    <div v-if="commits.length === 0">
-      LOADING
+    <div v-if="!commitsLoaded">
+      Loading ...
     </div>
   </div>
 </template>
@@ -22,6 +22,12 @@ import './../assets/c3.min.css'
 export default {
   name: 'Commits',
   computed: {
+    commitsLoaded() {
+      if(this.$store.getters.commitsLength > 0)
+        return true;
+      else
+        return false;
+    },
     commits() {
       return this.$store.getters.commits;
     },
@@ -39,7 +45,7 @@ export default {
     this.getCommits(repodata);
     this.$store.commit('setDisplayNavigation', true);
 
-
+    this.$store.commit('resetCommits');
   },
   beforeDestroy() {
     this.$store.commit('delCommits');
@@ -92,7 +98,7 @@ export default {
       },
       color: {
         pattern: ['#F1524F', '#DE8051', '#F8A147', '#77AE6D', '#74ADAB', '#47BED6', '#62CAEF', '#888888'],
-      },
+      }
     })
     }
   },

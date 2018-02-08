@@ -55,8 +55,12 @@ export default {
   delReadme(state) {
     state.readme = '';
   },
-  setCommits(state, commits) {
-    state.commits = commits;
+  updateCommits(state, commits) {
+    const newCommits = state.commits.concat(commits);
+    state.commits = newCommits;
+  },
+  resetCommits(state) {
+    state.commits = [];
   },
   delStatistics(state) {
     state.statistics = {

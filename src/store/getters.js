@@ -26,6 +26,9 @@ export default {
   commits(state) {
     return state.commits;
   },
+  commitsLength(state) {
+    return state.commits.length;
+  },
   navigation(state) {
     return state.displayNavigation;
   },
